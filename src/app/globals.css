@@ -2,20 +2,39 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+.social-icon {
+  @apply w-8 h-8 fill-gray-500 hover:fill-white
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+section > .hero {
+  @apply hidden md:grid ;
+  grid-template-columns: .4fr .6fr;
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+button.bg-primary:hover {
+  @apply duration-300 scale-105;
+  @apply bg-[#ff5c2a];
+}
+
+input[type="email"],
+input[type="password"] {
+  @apply bg-gray-200;
+  @apply block w-full p-2 my-2 rounded-md;
+}
+
+button {
+  @apply text-gray-600 font-bold;
+  @apply block w-full p-2 my-2 rounded-md;
+}
+
+button[type="submit"] {
+  @apply bg-primary text-white;
+}
+
+input:disabled {
+  @apply cursor-not-allowed bg-gray-300;
+}
+
+button:disabled {
+  @apply cursor-not-allowed opacity-50;
 }
