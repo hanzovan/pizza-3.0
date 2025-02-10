@@ -16,9 +16,12 @@ button.bg-primary:hover {
   @apply bg-[#ff5c2a];
 }
 
+input[type="text"],
+input[type="tel"],
+input[type="number"],
 input[type="email"],
 input[type="password"] {
-  @apply bg-gray-200;
+  @apply bg-gray-100 border border-gray-200;
   @apply block w-full p-2 my-2 rounded-md;
 }
 
@@ -32,9 +35,16 @@ button[type="submit"] {
 }
 
 input:disabled {
-  @apply cursor-not-allowed bg-gray-300;
+  @apply cursor-not-allowed bg-gray-300 text-gray-500;
 }
 
 button:disabled {
   @apply cursor-not-allowed opacity-50;
+}
+
+div.tabs > * {
+  @apply bg-gray-400 text-white px-6 py-2 rounded-full text-sm font-bold;
+}
+div.tabs > *.active {
+  @apply bg-primary;
 }

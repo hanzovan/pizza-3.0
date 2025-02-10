@@ -62,7 +62,7 @@ export function Header() {
           onClick={() => setOpenMobileNav(false)}
         >
           <div
-            className={`bg-gray-300 mx-4 rounded-lg flex flex-col gap-4 text-center mt-2 py-4 text-xl font-bold mt-[100px]`}
+            className={`bg-gray-300 mx-4 rounded-lg flex flex-col gap-4 text-center py-4 text-xl font-bold mt-[100px]`}
           >
             {mobileNavItems.map((item, index) => (
               <Link

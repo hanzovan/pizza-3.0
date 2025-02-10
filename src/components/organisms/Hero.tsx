@@ -19,7 +19,7 @@ export function Hero() {
           Pizza is the missing piece that makes everyday complete, a simple yet
           delicious in life
         </p>
-        <div className="text-sm font-bold flex gap-8 items-center flex justify-center mt-8">
+        <div className="text-sm font-bold flex gap-8 items-center justify-center mt-8">
           <Link href={"/menu"}>
             <button className="bg-primary text-white px-8 py-3 rounded-full uppercase flex gap-2 items-center">
               order now

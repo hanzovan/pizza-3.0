@@ -6,5 +6,10 @@ export const routes = {
     login: {url: '/login', label: 'Login'},
     register: {url: '/register', label: 'Register'},
     logout: {url: '/api/auth/signout', label: 'Logout'},
-    profile: {url: '/profile', label: 'Profile'}
+    profile: {url: '/profile', label: 'Profile'},
+    categories: {url: '/categories', label: 'Categories'},
+    menu_item: {url: '/menu-items', label: 'Menu Items'},
+    users: {url: '/users', label: 'Users'},
+    my_orders: {url: '/my-orders', label: 'My Orders'},
+    all_orders: {url: '/all-orders', label: 'All Orders'},
 }

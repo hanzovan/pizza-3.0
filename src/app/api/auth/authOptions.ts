@@ -6,8 +6,7 @@ import Credentials from "next-auth/providers/credentials";
 import Google from "next-auth/providers/google";
 import { UserService } from "@/lib/services";
 
-import { CredentialType, CustomSessionUser, JwtProps, SessionProps } from "@/types";
-import { AuthUserType } from "@/types";
+import { CredentialType, CustomSessionUser, JwtProps, SessionProps, AuthUserType } from "@/types";
 import { standardizeProfile } from "@/lib/utils";
 
 const authOptions: NextAuthOptions = {

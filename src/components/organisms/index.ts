@@ -5,3 +5,5 @@ export { HomeMenu } from "./HomeMenu";
 export { MenuItem } from "./MenuItem";
 export { InfoSection } from "./InfoSection";
 export { ImageCarousel } from "./ImageCarousel";
+export { UserTabs } from "./UserTabs";
+export { UserForm } from "./UserForm";

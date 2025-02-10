@@ -96,3 +96,10 @@ export type OAuthProfile = {
   created_at?: string;
   updated_at?: string;
 };
+
+export type UserFormProps = {
+  handleSubmit: React.FormEventHandler<HTMLFormElement>;
+  user: AuthUserType;
+  setUser: React.Dispatch<React.SetStateAction<AuthUserType>>;
+  isLoading: boolean;
+}

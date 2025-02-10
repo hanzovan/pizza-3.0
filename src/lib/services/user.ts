@@ -106,6 +106,32 @@ const loginUser = async (email: string, passwordInput: string) => {
     }
 }
 
-const UserService = { createUser, loginUser };
+const findUser = async (filter: {_id?: string; email?: string}) => {
+  try {
+    const result = await UserModel.findOne(filter).lean().exec() as UserType | null;
+    if (!result) {
+      return {
+        isError: true,
+        data: null,
+        message: 'User does not existed'
+      }
+    }
+    const {password, _id, ...otherUserInfo} = result as UserType & { _id: mongoose.Types.ObjectId}
+
+    return {
+      isError: false,
+      data: { id: _id.toString(), ...otherUserInfo },
+      message: 'User finded!'
+    }
+  } catch (error) {
+    return {
+      isError: true,
+      data: null,
+      message: error instanceof Error ? error.message : 'An unknown error occurred'
+    }
+  }
+}
+
+const UserService = { createUser, loginUser, findUser };
 
 export { UserService };
