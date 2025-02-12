@@ -15,7 +15,7 @@ export function UserForm ({
         }))
     };
 
-    const handleAvatarChange = async (event: any) => {
+    const handleAvatarChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
         const files = event.target.files;
         if (files?.length === 1) {
             const data = new FormData();
