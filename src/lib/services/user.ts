@@ -1,5 +1,5 @@
 import { UserModel } from "@/database/models";
-import { UserType } from "@/types";
+import { AuthUserType, UserType } from "@/types";
 import bcrypt from "bcrypt";
 import mongoose from "mongoose";
 
@@ -132,6 +132,24 @@ const findUser = async (filter: {_id?: string; email?: string}) => {
   }
 }
 
-const UserService = { createUser, loginUser, findUser };
+const updateUser = async (userInfo: AuthUserType) => {
+  try {
+    const {email, ...otherUserInfo} = userInfo
+    const result = await UserModel.findOneAndUpdate({ email }, otherUserInfo, {upsert: true})
+    return {
+      isError: false,
+      data: result,
+      message: 'User updated'
+    }
+  } catch (error) {
+    return {
+      isError: true,
+      data: null,
+      message: error instanceof Error ? error.message : 'An unknown error occurred'
+    }
+  }
+}
+
+const UserService = { createUser, loginUser, findUser, updateUser };
 
 export { UserService };

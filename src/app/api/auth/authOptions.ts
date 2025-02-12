@@ -65,7 +65,8 @@ const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async jwt({ token, user }: JwtProps) {
+    // the jwt token will pass into session
+    async jwt({ token, user, trigger, session }: JwtProps) {
       if (token && user) {
         const _user: CustomSessionUser = {
           id: user.id,
@@ -79,6 +80,14 @@ const authOptions: NextAuthOptions = {
       if (token && !user) {
         const _user = token?.user;
         token.user = _user;
+      }
+
+      // If there's a trigger that want to update session
+      if (trigger === 'update' && session?.user) {
+        token.user = {
+          ...(token.user ?? {}),// preserve the other user info
+          ...session.user,// merging new change to user in token
+        }
       }
       return token;
     },

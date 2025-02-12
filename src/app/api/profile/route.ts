@@ -19,5 +19,43 @@ export async function GET(req: NextRequest) {
     }
     const result = await UserService.findUser(filterUser)
 
-    return Response.json(result);
+    if (result.isError) {
+        return Response.json({ message: result.message }, {status: 400})
+    }
+
+    return Response.json(result.data);
+}
+
+export async function PUT(req: NextRequest) {
+    const data = await req.json();
+
+    const session = await getServerSession(authOptions)
+
+    if (!session) {
+        return Response.json({ message: 'Please log in to continue'}, {status: 400})
+    }
+    
+    const userEmail = session?.user?.email
+
+    const modifiedUserEmail = data?.email
+
+    const password = data?.password
+
+    const role = session?.user?.role
+
+    if (password) {
+        return Response.json({ message: 'Currently we do not allow change your password'}, {status: 500})
+    }
+
+    if ((userEmail !== modifiedUserEmail) && role !== 'admin') {
+        return Response.json({ message: 'You are not allowed to do this!'}, {status: 500})
+    }
+    
+    const result = await UserService.updateUser(data)
+
+    if (result.isError) {
+        return Response.json({ message: result.message }, {status: 400})
+    }
+
+    return Response.json(result.data)
 }

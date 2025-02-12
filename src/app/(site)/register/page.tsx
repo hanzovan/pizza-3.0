@@ -48,6 +48,9 @@ export default function RegisterPage() {
                         body: JSON.stringify(state.credentials),
                         headers: {"Content-Type": "application/json"}
                     })
+
+                    console.log(response);
+
                     if (response.ok) {
                         resolve("Success")
                     } else {

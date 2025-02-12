@@ -9,6 +9,7 @@ import {
   settingItems,
 } from "@/lib/routes/navigatingConfigs";
 import { useSession } from "next-auth/react";
+import { UseProfile } from "../UseProfile";
 
 export function Header() {
   const session = useSession();
@@ -29,6 +30,10 @@ export function Header() {
       : settingItems.publicSettingItems;
 
   const [openMobileNav, setOpenMobileNav] = useState(false);
+
+  // const { loading: profileLoading, data: profileData } = UseProfile();
+
+  // let userName = profileData?.name
 
   const userData = session?.data?.user;
 

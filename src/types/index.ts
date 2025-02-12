@@ -72,6 +72,8 @@ export type CustomSessionUser = {
 export type JwtProps = {
   token: JWT;
   user: CustomUser | CustomAdapterUser | null;
+  trigger?: "signIn" | "signUp" | "update";
+  session?: Session; 
 };
 
 export type SessionProps = {

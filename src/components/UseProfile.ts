@@ -9,7 +9,7 @@ export function UseProfile() {
         setLoading(true);
         fetch("/api/profile").then(response => {
             response.json().then(result => {
-                setData(result.data);
+                setData(result);
                 setLoading(false);
             })
         })
