@@ -4,12 +4,12 @@ import { allTabs } from "@/lib/routes/tabsConfigs";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export function UserTabs({ isAdmin }: { isAdmin: string }) {
+export function UserTabs({ userRole }: { userRole: string }) {
   const path = usePathname();
   const tabUrls =
-    isAdmin === "admin"
+    userRole === "admin"
       ? allTabs.adminTabs
-      : isAdmin === "user"
+      : userRole === "user"
       ? allTabs.userTabs
       : [];
 

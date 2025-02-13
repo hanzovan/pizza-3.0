@@ -10,14 +10,14 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 export default function ProfilePage() {
-    const { data: session, update} = useSession();
-    if (!session) {
-        return redirect("/login?callbackUrl=/profile")
-    }
+  const { data: session, update } = useSession();
+  if (!session) {
+    return redirect("/login?callbackUrl=/profile");
+  }
+  const userRole = session.user.role || "";
   const [isLoading, setIsLoading] = useState(false);
 
   const { loading: profileLoading, data: profileData } = UseProfile();
-  const isAdmin = profileData?.role || "";
   const [user, setUser] = useState<AuthUserType>({
     id: "",
     name: "",
@@ -49,12 +49,12 @@ export default function ProfilePage() {
           if (response.ok) {
             // update session user name
             await update({
-                ...session,
-                user: {
-                    ...session?.user,
-                    name: user.name
-                }
-            })
+              ...session,
+              user: {
+                ...session?.user,
+                name: user.name,
+              },
+            });
             resolve("Profile saved successfully");
           } else {
             const errorData = await response.json();
@@ -86,20 +86,22 @@ export default function ProfilePage() {
     }
   }, [profileData]);
 
-  if (profileLoading) {
-    return "Loading user info...";
-  }
-
   return (
     <section>
-      <UserTabs isAdmin={isAdmin} />
+      <UserTabs userRole={userRole} />
       <SectionHeader mainHeader="Profile" />
-      <UserForm
-        handleSubmit={handleSubmit}
-        user={user}
-        setUser={setUser}
-        isLoading={isLoading}
-      />
+      {profileLoading ? (
+        <div className="pt-4 text-center">
+            Loading user info...
+        </div>
+      ): (
+          <UserForm
+            handleSubmit={handleSubmit}
+            user={user}
+            setUser={setUser}
+            isLoading={isLoading}
+          />
+      )}
     </section>
   );
 }
