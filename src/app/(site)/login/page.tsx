@@ -1,14 +1,28 @@
 "use client";
 
 import { SectionHeader } from "@/components/molecules";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 export default function LoginPage() {
     const router = useRouter();
+
+    const {data: session} = useSession();
+    const searchParams = useSearchParams();
+    
+    // Get callbackUrl from query, default to "/"
+    const callbackUrl = searchParams.get('callbackUrl') || "/";
+
+    // If user already login, redirect user back to the callbackUrl
+    useEffect(() => {
+        if (session) {
+            router.push(callbackUrl)
+        }
+    }, [session, router, callbackUrl])
+    
     const initialState = {
         credentials: {
             email: "",
@@ -65,8 +79,6 @@ export default function LoginPage() {
             loading: "Loggin you in...",
             success: "Logged in successfully",
             error: (err: Error) => err.message
-        }).then(() => {
-            router.push('/');
         }).catch(() => {})
     }
 
@@ -77,7 +89,7 @@ export default function LoginPage() {
                 isLoading: true
             }))
             setTimeout(() => {
-                signIn('google', {callbackUrl: '/'}).then(() => {
+                signIn('google', {callbackUrl}).then(() => {
                     toast.success('Logged in with google successfully');
                 })
             }, 500)

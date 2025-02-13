@@ -5,11 +5,15 @@ import { UserForm, UserTabs } from "@/components/organisms";
 import { UseProfile } from "@/components/UseProfile";
 import { AuthUserType } from "@/types";
 import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 export default function ProfilePage() {
     const { data: session, update} = useSession();
+    if (!session) {
+        return redirect("/login?callbackUrl=/profile")
+    }
   const [isLoading, setIsLoading] = useState(false);
 
   const { loading: profileLoading, data: profileData } = UseProfile();
