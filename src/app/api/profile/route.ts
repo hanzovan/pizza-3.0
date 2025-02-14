@@ -4,6 +4,8 @@ import { authOptions } from "../auth/authOptions";
 import { UserService } from "@/lib/services";
 
 export async function GET(req: NextRequest) {
+    // verify user
+    
     const url = new URL(req.url)
     const _id = url.searchParams.get('_id')
     let filterUser = {};
@@ -23,7 +25,7 @@ export async function GET(req: NextRequest) {
         return Response.json({ message: result.message }, {status: 400})
     }
 
-    return Response.json(result.data);
+    return Response.json(result.data, {status: 200});
 }
 
 export async function PUT(req: NextRequest) {
@@ -57,5 +59,5 @@ export async function PUT(req: NextRequest) {
         return Response.json({ message: result.message }, {status: 400})
     }
 
-    return Response.json(result.data)
+    return Response.json(result.data, {status: 200})
 }

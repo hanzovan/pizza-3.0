@@ -105,3 +105,14 @@ export type UserFormProps = {
   setUser: React.Dispatch<React.SetStateAction<AuthUserType>>;
   isLoading: boolean;
 }
+
+export type CategoryType = {
+  name: string;
+  _id?: string;
+}
+
+export type ButtonNeedConfirmProps = {
+  label: string;
+  className: string;
+  onProceed: React.MouseEventHandler<HTMLButtonElement>;
+}
