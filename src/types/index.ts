@@ -116,3 +116,29 @@ export type ButtonNeedConfirmProps = {
   className: string;
   onProceed: React.MouseEventHandler<HTMLButtonElement>;
 }
+
+export type MenuItemType = {
+  _id?: string | undefined;
+  name: string | undefined;
+  category: string | undefined;
+  description: string | undefined;
+  basePrice: number | undefined;
+  image: string | undefined;
+  sizes: { name: string; extraPrice: number}[];
+  extraIngredients: { name: string; extraPrice: number}[];
+}
+
+export type MenuItemFormExtraFieldProps = {
+  name: string;
+  addLabel: string;
+  fieldData: { name: string; extraPrice: number }[];
+  updateFieldData: (newData: { name: string; extraPrice: number }[]) => void;
+  formIsSubmiting: boolean;
+}
+
+export type MenuItemFormProps = {
+  formIsSubmiting: boolean;
+  handleSubmit: React.FormEventHandler<HTMLFormElement>;
+  menuItem: MenuItemType;
+  setMenuItem: React.Dispatch<React.SetStateAction<MenuItemType>>;
+}

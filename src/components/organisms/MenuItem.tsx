@@ -1,3 +1,5 @@
+
+
 export function MenuItem() {
   return (
     <div className="bg-gray-300 pt-8 pb-4 px-6 rounded-lg text-center hover:bg-gray-100 hover:shadow hover:shadow/50 duration-300 hover:scale-105 flex flex-col justify-between">

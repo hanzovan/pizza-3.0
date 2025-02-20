@@ -7,3 +7,5 @@ export { InfoSection } from "./InfoSection";
 export { ImageCarousel } from "./ImageCarousel";
 export { UserTabs } from "./UserTabs";
 export { UserForm } from "./UserForm";
+export { MenuItemForm } from "./MenuItemForm";
+export { MenuItemFormExtraField } from "./MenuItemFormExtraField";

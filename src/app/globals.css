@@ -25,7 +25,12 @@ input[type="password"] {
   @apply block w-full p-2 my-2 rounded-md;
 }
 
-button {
+select {
+  @apply bg-gray-100 border border-gray-200 text-gray-500;
+  @apply block w-full p-2 my-2 rounded-md;
+}
+
+button, .button {
   @apply text-gray-600 font-bold;
   @apply block w-full p-2 my-2 rounded-md;
 }
@@ -48,3 +53,4 @@ div.tabs > * {
 div.tabs > *.active {
   @apply bg-primary;
 }
+

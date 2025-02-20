@@ -58,8 +58,6 @@ const findAllCategories = async () => {
 
 const updateCategory = async (_id: string, newName: string) => {
     try {
-        console.log(_id)
-        console.log(newName)
         const updatedCategory = await CategoryModel.updateOne({_id}, {name: newName});
         return {
             isError: false,
