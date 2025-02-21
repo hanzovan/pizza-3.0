@@ -16,6 +16,10 @@ export default function CategoriesPage() {
     }
     const userRole = session.user.role || "";
 
+    if (userRole !== 'admin') {
+        return redirect("/")
+    }
+
     const [categoryName, setCategoryName] = useState("");
     const [categories, setCategories] = useState<CategoryType[]>([]);
     const [editCategory, setEditCategory] = useState<CategoryType | null>();

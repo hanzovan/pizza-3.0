@@ -132,6 +132,39 @@ const findUser = async (filter: {_id?: string; email?: string}) => {
   }
 }
 
+const findAllUsers = async () => {
+  try {
+    // const results = await UserModel.find().select("-password");
+
+    const results = await UserModel.find().lean().exec();
+
+    if (!results || results.length === 0) {
+      return {
+        isError: true,
+        data: null,
+        message: "No users found"
+      }
+    }
+    // convert _id to string for each user and return user info
+    const sanitizedUsers = results.map(user => {
+      const { password, _id, ...otherUserInfo } = user as unknown as UserType & { _id: mongoose.Types.ObjectId}
+      return { id: _id.toString(), ...otherUserInfo}
+    })
+
+    return {
+      isError: false,
+      data: sanitizedUsers,
+      message: "Users retrieved successfully"
+    }
+  } catch (error) {
+    return {
+      isError: true,
+      data: null,
+      message: error instanceof Error ? error.message : 'An unknown error occurred'
+    };
+  }
+}
+
 const updateUser = async (userInfo: AuthUserType) => {
   try {
     const {email, ...otherUserInfo} = userInfo
@@ -150,6 +183,6 @@ const updateUser = async (userInfo: AuthUserType) => {
   }
 }
 
-const UserService = { createUser, loginUser, findUser, updateUser };
+const UserService = { createUser, loginUser, findUser, findAllUsers, updateUser };
 
 export { UserService };

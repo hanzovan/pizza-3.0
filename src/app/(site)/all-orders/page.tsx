@@ -11,6 +11,9 @@ export default function AllOrdersPage() {
         return redirect("/login?callbackUrl=/all-orders")
     }
     const userRole = session.user.role || "";
+    if (userRole !== 'admin') {
+        return redirect("/")
+    }
     return (
         <section>
             <UserTabs userRole={userRole} />

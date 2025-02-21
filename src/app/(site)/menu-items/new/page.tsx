@@ -18,6 +18,10 @@ export default function CreateMenuItemPage() {
   }
   const userRole = session.user.role || "";
 
+  if (userRole !== 'admin') {
+    return redirect("/")
+}
+
   const [menuItem, setMenuItem] = useState<MenuItemType>({
     name: "",
     category: "",

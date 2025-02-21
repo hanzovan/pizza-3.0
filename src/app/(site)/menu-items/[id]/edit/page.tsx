@@ -20,6 +20,10 @@ export default function EditMenuItemPage() {
   }
   const userRole = session.user.role || "";
 
+  if (userRole !== 'admin') {
+    return redirect("/")
+}
+
   // create a default value for menuItem, then use useEffect to fetch the info
   const [menuItem, setMenuItem] = useState<MenuItemType>({
     name: "",
