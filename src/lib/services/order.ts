@@ -1,13 +1,13 @@
-import { MenuItemModel } from "@/database/models";
-import { MenuItemType } from "@/types";
+import { OrderModel } from "@/database/models";
+import { OrderType } from "@/types";
 
-const createMenuItem = async (body: MenuItemType) => {
+const createOrder = async (body: OrderType) => {
     try {
-        const newItem = await MenuItemModel.create(body)
+        const newOrder = await OrderModel.create(body)
         return {
             isError: false,
-            data: newItem,
-            message: "New item was created!"
+            data: newOrder,
+            message: "New order was created successfully"
         }
     } catch (error) {
         return {
@@ -18,13 +18,13 @@ const createMenuItem = async (body: MenuItemType) => {
     }
 }
 
-const findOneMenuItem = async (_id: string) => {
+const findOneOrder = async (_id: string) => {
     try {
-        const item = await MenuItemModel.findOne({_id})
+        const order = await OrderModel.findOne({_id})
         return {
             isError: false,
-            data: item,
-            message: "Item founded!"
+            data: order,
+            message: "Order founded"
         }
     } catch (error) {
         return {
@@ -35,14 +35,14 @@ const findOneMenuItem = async (_id: string) => {
     }
 }
 
-const findAllMenuItems = async () => {
+const findAllOrders = async () => {
     try {
-        const allMenuItems = await MenuItemModel.find()
+        const allOrders = await OrderModel.find()
 
         return {
             isError: false,
-            data: allMenuItems,
-            message: "Find all menu items successfully"
+            data: allOrders,
+            message: "Found all orders successfully"
         }
     } catch (error) {
         return {
@@ -53,13 +53,30 @@ const findAllMenuItems = async () => {
     }
 }
 
-const updateMenuItem = async (_id: string, newInfo: MenuItemType) => {
+const findAllOrdersByEmail = async(email: string) => {
     try {
-        const newData = await MenuItemModel.updateOne({_id}, {$set: newInfo})
+        const orders = await OrderModel.find({email})
+        return {
+            isError: false,
+            data: orders,
+            message: "Founded orders by email"
+        }
+    } catch (error) {
+        return {
+            isError: true,
+            data: null,
+            message: error instanceof Error ? error.message : 'An unknown error occurred'
+        };
+    }
+}
+
+const updateOrder = async (_id: string, newInfo: Partial<OrderType>) => {
+    try {
+        const newData = await OrderModel.updateOne({_id}, {$set: newInfo})
         return {
             isError: false,
             data: newData,
-            message: "Updated menu items successfully"
+            message: "Updated order successfully"
         }
     } catch (error) {
         return {
@@ -70,23 +87,6 @@ const updateMenuItem = async (_id: string, newInfo: MenuItemType) => {
     }
 }
 
-const deleteMenuItem = async (_id: string) => {
-    try {
-        await MenuItemModel.deleteOne({_id});
-        return {
-            isError: false,
-            data: null,
-            message: "Menu item deleted!"
-        }
-    } catch (error) {
-        return {
-            isError: true,
-            data: null,
-            message: error instanceof Error ? error.message : 'An unknown error occurred'
-        };
-    }
-}
+const OrderService = { createOrder, findAllOrders, findOneOrder, findAllOrdersByEmail, updateOrder }
 
-const MenuItemService = { createMenuItem, findAllMenuItems, findOneMenuItem, updateMenuItem, deleteMenuItem };
-
-export { MenuItemService };
+export { OrderService };

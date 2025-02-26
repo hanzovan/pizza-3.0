@@ -2,7 +2,7 @@ import { routes } from "./routes";
 
 const userTabs = [
     routes.profile,
-    routes.my_orders
+    routes.orders
 ]
 
 const adminTabs = [
@@ -10,8 +10,7 @@ const adminTabs = [
     routes.categories,
     routes.menu_item,
     routes.users,
-    routes.all_orders,
-    routes.my_orders
+    routes.orders,
 ]
 
 const allTabs = { userTabs, adminTabs }

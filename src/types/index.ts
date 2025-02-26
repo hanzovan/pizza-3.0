@@ -142,3 +142,50 @@ export type MenuItemFormProps = {
   menuItem: MenuItemType;
   setMenuItem: React.Dispatch<React.SetStateAction<MenuItemType>>;
 }
+
+export type MenuItemTileProps = {
+  onAddToCart: () => void,
+  item: MenuItemType
+}
+
+export type MenuItemOptionType = {
+  name: string,
+  extraPrice: number
+};
+
+export type CartProductType = MenuItemType & {
+  size?: MenuItemOptionType | null;
+  extra?: MenuItemOptionType[];
+}
+
+export type CartContextType = {
+  cartProducts: CartProductType[];
+  setCartProducts: React.Dispatch<React.SetStateAction<CartProductType[]>>;
+  addToCart: (product: MenuItemType, size?: MenuItemOptionType, extra?: MenuItemOptionType[]) => void;
+  removeCartProduct: (indexToRemove: number) => void;
+  clearCart: () => void;
+}
+
+export type AddToCartButtonProps = {
+  handleClick: () => void,
+  item: MenuItemType,
+  hasSizesOrExtras: boolean
+}
+
+export type UserAddressProps = {
+  user: AuthUserType;
+  setUser: React.Dispatch<React.SetStateAction<AuthUserType>>;
+  isLoading: boolean;
+}
+
+export type OrderType = {
+  _id?: string | undefined;
+  userEmail: string,
+  phone: string,
+  streetAddress: string,
+  postalCode: string,
+  city: string,
+  country: string,
+  cartProducts: CartProductType,
+  paid: boolean
+}

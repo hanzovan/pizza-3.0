@@ -10,6 +10,5 @@ export const routes = {
     categories: {url: '/categories', label: 'Categories'},
     menu_item: {url: '/menu-items', label: 'Menu Items'},
     users: {url: '/users', label: 'Users'},
-    my_orders: {url: '/my-orders', label: 'My Orders'},
-    all_orders: {url: '/all-orders', label: 'All Orders'},
+    orders: {url: '/orders', label: 'Orders'},
 }

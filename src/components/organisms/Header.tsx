@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Cart, HamburgerButton } from "../atoms";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import {
   mobileItems,
   navigatingItems,
@@ -10,6 +10,7 @@ import {
 } from "@/lib/routes/navigatingConfigs";
 import { useSession } from "next-auth/react";
 import { UseProfile } from "../UseProfile";
+import { CartContext } from "../AppContext";
 
 export function Header() {
   const session = useSession();
@@ -31,10 +32,6 @@ export function Header() {
 
   const [openMobileNav, setOpenMobileNav] = useState(false);
 
-  // const { loading: profileLoading, data: profileData } = UseProfile();
-
-  // let userName = profileData?.name
-
   const userData = session?.data?.user;
 
   let userName = userData?.name || userData?.email;
@@ -42,6 +39,13 @@ export function Header() {
   if (userName?.includes(' ')) {
     userName = userName?.split(' ')[0];
   }
+
+  const cartContext = useContext(CartContext);
+  if (!cartContext) {
+    throw new Error("CartContext must be used within an AppProvider");
+  }
+
+  const { cartProducts } = cartContext;
 
   return (
     <header>
@@ -53,6 +57,11 @@ export function Header() {
         <div className="flex items-center gap-6">
           <Link href={"/cart"} className="relative">
             <Cart className="w-10 h-10" />
+            {cartProducts?.length > 0 && (
+              <span className="absolute -top-3 right-0 bg-primary text-white text-sm rounded-full px-2 py-1">
+                {cartProducts.length}
+              </span>
+            )}
           </Link>
           <button onClick={() => setOpenMobileNav((prev) => !prev)}>
             <HamburgerButton strokeWidth={2} className="w-10 h-10" />
@@ -128,6 +137,11 @@ export function Header() {
           )}
           <Link href={"/cart"}>
             <Cart className="w-8 h-8" strokeWidth={1.5} />
+            {cartProducts?.length > 0 && (
+              <span className="absolute top-2 right-3 bg-primary text-white text-sm rounded-full px-2 py-1">
+                {cartProducts.length}
+              </span>
+            )}
           </Link>
         </div>
       </div>

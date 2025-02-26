@@ -9,3 +9,5 @@ export { UserTabs } from "./UserTabs";
 export { UserForm } from "./UserForm";
 export { MenuItemForm } from "./MenuItemForm";
 export { MenuItemFormExtraField } from "./MenuItemFormExtraField";
+export { MenuItemTile } from "./MenuItemTile";
+export { UserAddress } from "./UserAddress";
