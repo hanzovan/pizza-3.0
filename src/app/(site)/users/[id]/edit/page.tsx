@@ -34,7 +34,7 @@ export default function EditUserPage() {
     fetch("/api/profile?_id=" + id).then(res => res.json().then(user => {
         setUser(user);
     }))
-  }, []);
+  }, [id]);
   if (!session) {
     return redirect("/login?callbackUrl=/users/" + id + "/edit");
   }
