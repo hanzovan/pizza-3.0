@@ -10,11 +10,6 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 export default function ProfilePage() {
-  const { data: session, update } = useSession();
-  if (!session) {
-    return redirect("/login?callbackUrl=/profile");
-  }
-  const userRole = session.user.role || "";
   const [isLoading, setIsLoading] = useState(false);
 
   const { loading: profileLoading, data: profileData } = UseProfile();
@@ -86,21 +81,25 @@ export default function ProfilePage() {
     }
   }, [profileData]);
 
+  const { data: session, update } = useSession();
+  if (!session) {
+    return redirect("/login?callbackUrl=/profile");
+  }
+  const userRole = session.user.role || "";
+
   return (
     <section>
       <UserTabs userRole={userRole} />
       <SectionHeader mainHeader="Profile" />
       {profileLoading ? (
-        <div className="pt-4 text-center">
-            Loading user info...
-        </div>
-      ): (
-          <UserForm
-            handleSubmit={handleSubmit}
-            user={user}
-            setUser={setUser}
-            isLoading={isLoading}
-          />
+        <div className="pt-4 text-center">Loading user info...</div>
+      ) : (
+        <UserForm
+          handleSubmit={handleSubmit}
+          user={user}
+          setUser={setUser}
+          isLoading={isLoading}
+        />
       )}
     </section>
   );

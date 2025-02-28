@@ -25,7 +25,7 @@ export default function CartPage() {
         subtotal += cartProductPrice(p);
     }
 
-    const { loading: profileLoading, data: profileData } = UseProfile();
+    const { data: profileData } = UseProfile();
     const [user, setUser] = useState<AuthUserType>({
     id: "",
     name: "",

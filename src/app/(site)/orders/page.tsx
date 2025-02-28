@@ -11,11 +11,6 @@ import { useEffect, useState } from "react";
 
 export default function OrdersPage() {
     const {data: session} = useSession();
-    if (!session) {
-        return redirect("/login?callbackUrl=/orders")
-    }
-    const userRole = session.user.role || "";
-
     const [loadingOrders, setLoadingOrders] = useState(true);
     const [orders, setOrders] = useState<OrderType[]>();
 
@@ -33,6 +28,11 @@ export default function OrdersPage() {
         fetchOrders();
     }, [])
     
+    if (!session) {
+        return redirect("/login?callbackUrl=/orders")
+    }
+    const userRole = session.user.role || "";
+
     return (
         <section>
             <UserTabs userRole={userRole} />

@@ -13,14 +13,6 @@ export default function EditUserPage() {
   const router = useRouter();
   const { id } = useParams();
   const { data: session, update } = useSession();
-  if (!session) {
-    return redirect("/login?callbackUrl=/users/" + id + "/edit");
-  }
-  const userRole = session.user.role || "";
-  if (userRole !== "admin") {
-    return redirect("/");
-  }
-
   const [user, setUser] = useState<AuthUserType>({
     id: "",
     name: "",
@@ -44,6 +36,14 @@ export default function EditUserPage() {
         setUser(user);
     }))
   }, []);
+  if (!session) {
+    return redirect("/login?callbackUrl=/users/" + id + "/edit");
+  }
+  const userRole = session.user.role || "";
+  if (userRole !== "admin") {
+    return redirect("/");
+  }
+
 
   const handleUpdate = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

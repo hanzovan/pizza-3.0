@@ -15,15 +15,10 @@ export default function EditMenuItemPage() {
   const router = useRouter();
   const { id } = useParams();
   const { data: session } = useSession();
-  if (!session) {
-    return redirect("/login?callbackUrl=/menu-items/" + id + "/edit");
-  }
-  const userRole = session.user.role || "";
 
-  if (userRole !== 'admin') {
-    return redirect("/")
-}
-
+  // state use for disable button
+  const [formIsSubmiting, setFormIsSubmiting] = useState(false)
+  
   // create a default value for menuItem, then use useEffect to fetch the info
   const [menuItem, setMenuItem] = useState<MenuItemType>({
     name: "",
@@ -34,7 +29,7 @@ export default function EditMenuItemPage() {
     sizes: [],
     extraIngredients: [],
   });
-
+  
   useEffect(() => {
     fetch("/api/menu-items").then((response) =>
       response.json().then((fetchedMenuItems) => {
@@ -43,9 +38,18 @@ export default function EditMenuItemPage() {
       })
     );
   }, []);
+  
+  if (!session) {
+    return redirect("/login?callbackUrl=/menu-items/" + id + "/edit");
+  }
+  const userRole = session.user.role || "";
 
-  // state use for disable button
-  const [formIsSubmiting, setFormIsSubmiting] = useState(false)
+  if (userRole !== 'admin') {
+    return redirect("/")
+}
+
+
+  
 
   // handle when form was submitted
   const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {

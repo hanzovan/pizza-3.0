@@ -10,15 +10,6 @@ import { useEffect, useState } from "react";
 
 export default function UsersPage() {
     const { data: session } = useSession();
-    if (!session) {
-        return redirect("/login?callbackUrl=/users")
-    }
-    const userRole = session.user.role || "";
-
-    if (userRole !== 'admin') {
-        return redirect("/")
-    }
-    
     const [users, setUsers] = useState<AuthUserType[]>([])
 
     useEffect(() => {
@@ -28,6 +19,15 @@ export default function UsersPage() {
             })
         })
     }, [])
+    if (!session) {
+        return redirect("/login?callbackUrl=/users")
+    }
+    const userRole = session.user.role || "";
+
+    if (userRole !== 'admin') {
+        return redirect("/")
+    }
+    
     return (
         <section>
             <UserTabs userRole={userRole} />
