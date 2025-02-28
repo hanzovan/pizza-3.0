@@ -37,8 +37,8 @@ export default function EditMenuItemPage() {
         setMenuItem(item);
       })
     );
-  }, []);
-  
+  }, [id]);
+
   if (!session) {
     return redirect("/login?callbackUrl=/menu-items/" + id + "/edit");
   }
