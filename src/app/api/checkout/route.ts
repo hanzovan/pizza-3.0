@@ -8,6 +8,7 @@ const stripe = require("stripe")(process.env.STRIPE_SK ?? "STRIPE_SK not found")
 
 export async function POST(req: NextRequest) {
     const {cartProducts, user} = await req.json();
+
     const session = await getServerSession(authOptions);
     const userEmail = session?.user?.email;
 
@@ -26,7 +27,7 @@ export async function POST(req: NextRequest) {
         city: user.city,
         country: user.country,
         cartProducts,
-        paid: false
+        paid: false,
     })
 
     const orderDoc = newOrder.data

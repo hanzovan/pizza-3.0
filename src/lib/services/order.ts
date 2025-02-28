@@ -55,7 +55,7 @@ const findAllOrders = async () => {
 
 const findAllOrdersByEmail = async(email: string) => {
     try {
-        const orders = await OrderModel.find({email})
+        const orders = await OrderModel.find({userEmail: email})
         return {
             isError: false,
             data: orders,

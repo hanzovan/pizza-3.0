@@ -24,7 +24,7 @@ export async function GET(req: NextRequest) {
             const foundedOrder = findUserOrder.data;
 
             // If order is not theirs, return null
-            if (foundedOrder.email !== userEmail) {
+            if (foundedOrder.userEmail !== userEmail) {
                 return Response.json({})
             } else {
                 return Response.json((await OrderService.findOneOrder(_id)).data);

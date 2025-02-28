@@ -17,7 +17,7 @@ const CartProductSchema = new Schema({
     description: {type: String, required: true},
     basePrice: {type: Number, required: true},
     image: {type: String, required: true},
-    size: [SizeSchema],
+    size: SizeSchema,
     extra: [ExtraIngredientSchema]
 })
 

@@ -52,6 +52,6 @@ export const standardizeProfile = (profile: OAuthProfile) => {
     }
 }
 
-export function dbTimeForHuman(str: string) {
-    return str.replace('T', ' ').substring(0, 16);
+export function dbTimeForHuman(str: string | undefined) {
+    return str?.replace('T', ' ').substring(0, 16);
 }

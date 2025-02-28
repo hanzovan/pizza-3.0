@@ -186,6 +186,7 @@ export type OrderType = {
   postalCode: string,
   city: string,
   country: string,
-  cartProducts: CartProductType,
-  paid: boolean
+  cartProducts: CartProductType[],
+  paid: boolean,
+  createdAt?: string
 }
