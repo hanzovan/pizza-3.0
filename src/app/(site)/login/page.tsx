@@ -1,11 +1,12 @@
 "use client";
 
 import { SectionHeader } from "@/components/molecules";
+import { SearchParamsHandler } from "@/components/SearchParamsHandler";
 import { signIn, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 export default function LoginPage() {
@@ -16,7 +17,8 @@ export default function LoginPage() {
     const searchParams = useSearchParams();
     
     // Get callbackUrl from query, default to "/"
-    const callbackUrl = searchParams.get('callbackUrl') || "/";
+    // const callbackUrl = searchParams.get('callbackUrl') || "/";
+    const callbackUrl = SearchParamsHandler();
 
     // If user already login, redirect user back to the callbackUrl
     useEffect(() => {
@@ -100,7 +102,7 @@ export default function LoginPage() {
         }
     }
     return (
-        <Suspense>
+        <>
             <section>
                 <SectionHeader mainHeader="Login" />
                 <form className="max-w-xs mx-auto" onSubmit={handleFormSubmit}>
@@ -125,6 +127,6 @@ export default function LoginPage() {
                     </div>
                 </form>
             </section>
-        </Suspense>
+        </>
     )
 }
