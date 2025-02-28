@@ -12,6 +12,7 @@ import { useContext, useEffect, useState } from "react";
 
 export default function OrderPage() {
   const cartContext = useContext(CartContext);
+
   const [order, setOrder] = useState<OrderType>();
 
   const { id } = useParams();
@@ -40,6 +41,12 @@ export default function OrderPage() {
       setUser(profileData);
     }
   }, [profileData]);
+
+  if (!cartContext) {
+    throw new Error("CartContext must be used within an AppProvider");
+  }
+
+  const { clearCart } = cartContext;
   useEffect(() => {
     if (typeof window.console !== "undefined") {
       if (window.location.href.includes("clear-cart=1")) {
@@ -55,12 +62,7 @@ export default function OrderPage() {
         });
       });
     }
-  }, [id]);
-
-  if (!cartContext) {
-    throw new Error("CartContext must be used within an AppProvider");
-  }
-  const { clearCart } = cartContext;
+  }, [id, clearCart]);
 
   let subtotal = 0;
 
