@@ -12,10 +12,16 @@ export default function LoginPage() {
     const router = useRouter();
 
     const {data: session} = useSession();
+
     const searchParams = useSearchParams();
-    
+    const [callbackUrl, setCallbackUrl] = useState("/");
+
     // Get callbackUrl from query, default to "/"
-    const callbackUrl = searchParams.get('callbackUrl') || "/";
+    useEffect(() => {
+        setCallbackUrl(searchParams.get('callbackUrl') || '/')
+    }, [searchParams])
+    
+    // const callbackUrl = searchParams.get('callbackUrl') || "/";
 
     // If user already login, redirect user back to the callbackUrl
     useEffect(() => {
