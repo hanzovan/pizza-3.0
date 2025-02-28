@@ -6,7 +6,7 @@ import { signIn, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 export default function LoginPage() {
@@ -100,7 +100,7 @@ export default function LoginPage() {
         }
     }
     return (
-        <>
+        <Suspense>
             <section>
                 <SectionHeader mainHeader="Login" />
                 <form className="max-w-xs mx-auto" onSubmit={handleFormSubmit}>
@@ -125,6 +125,6 @@ export default function LoginPage() {
                     </div>
                 </form>
             </section>
-        </>
+        </Suspense>
     )
 }
