@@ -13,10 +13,6 @@ export default function LoginPage() {
 
     const {data: session} = useSession();
     
-    // Get callbackUrl from query, default to "/"
-    // const callbackUrl = searchParams.get('callbackUrl') || "/";
-    // const callbackUrl = SearchParamsHandler();
-
     const [callbackUrl, setCallbackUrl] = useState('/');
 
     useEffect(() => {
@@ -105,7 +101,7 @@ export default function LoginPage() {
         }
     }
     return (
-        <Suspense>
+        <>
             <section>
                 <SectionHeader mainHeader="Login" />
                 <form className="max-w-xs mx-auto" onSubmit={handleFormSubmit}>
@@ -130,6 +126,6 @@ export default function LoginPage() {
                     </div>
                 </form>
             </section>
-        </Suspense>
+        </>
     )
 }
