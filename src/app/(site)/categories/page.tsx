@@ -11,14 +11,6 @@ import toast from "react-hot-toast";
 
 export default function CategoriesPage() {
   const { data: session } = useSession();
-  const [categoryName, setCategoryName] = useState("");
-  const [categories, setCategories] = useState<CategoryType[]>([]);
-  const [editCategory, setEditCategory] = useState<CategoryType | null>();
-
-  useEffect(() => {
-    fetchCategories();
-  }, []);
-
   if (!session) {
     return redirect("/login?callbackUrl=/categories");
   }
@@ -27,6 +19,14 @@ export default function CategoriesPage() {
   if (userRole !== "admin") {
     return redirect("/");
   }
+  const [categoryName, setCategoryName] = useState("");
+  const [categories, setCategories] = useState<CategoryType[]>([]);
+  const [editCategory, setEditCategory] = useState<CategoryType | null>();
+
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
 
   const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
