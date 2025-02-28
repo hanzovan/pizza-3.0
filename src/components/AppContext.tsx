@@ -37,7 +37,7 @@ export function AppProvider({ children }: AppProviderProps) {
     if (ls && ls.getItem("cart")) {
       setCartProducts(JSON.parse(ls.getItem("cart") || ""));
     }
-  }, []);
+  }, [ls]);
 
   function saveCartProductsToLocalStorage(cartProduct: CartProductType[]) {
     if (ls) {

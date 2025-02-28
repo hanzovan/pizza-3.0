@@ -11,6 +11,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
+import Image from "next/image";
 
 export function ImageCarousel() {
     const [randomItems, setRandomItems] = useState<MenuItemType[]>([]);
@@ -29,7 +30,7 @@ export function ImageCarousel() {
                     <Swiper modules={[Pagination, Autoplay]} spaceBetween={30} slidesPerView={1} pagination={{ clickable: true, el: '.swiper-pagination'}} autoplay={{ delay: 5000}} loop={true}>
                         {randomItems.map((item, index) => (
                             <SwiperSlide key={index}>
-                                <img src={item.image || "/dishes.jpg"} alt={item.name} className="w-[400px] h-[200px] md:w-[500px] md:h-[350px] object-cover mx-auto rounded-lg" />
+                                <Image src={item.image || "/dishes.jpg"} alt={item.name} className="w-[400px] h-[200px] md:w-[500px] md:h-[350px] object-cover mx-auto rounded-lg" />
                                 <h2 className="text-2xl font-bold text-gray-500 pt-4">
                                     {item.name}
                                 </h2>

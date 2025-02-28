@@ -9,7 +9,6 @@ import {
   settingItems,
 } from "@/lib/routes/navigatingConfigs";
 import { useSession } from "next-auth/react";
-import { UseProfile } from "../UseProfile";
 import { CartContext } from "../AppContext";
 
 export function Header() {

@@ -90,7 +90,7 @@ const loginUser = async (email: string, passwordInput: string) => {
             }
         }
         
-        const {password, _id, ...otherUserInfo} = result as UserType & { _id: mongoose.Types.ObjectId}
+        const {password: _, _id, ...otherUserInfo} = result as UserType & { _id: mongoose.Types.ObjectId}
         
         return {
             isError: false,
@@ -116,7 +116,7 @@ const findUser = async (filter: {_id?: string; email?: string}) => {
         message: 'User does not existed'
       }
     }
-    const {password, _id, ...otherUserInfo} = result as UserType & { _id: mongoose.Types.ObjectId}
+    const {password: _, _id, ...otherUserInfo} = result as UserType & { _id: mongoose.Types.ObjectId}
 
     return {
       isError: false,
@@ -147,7 +147,7 @@ const findAllUsers = async () => {
     }
     // convert _id to string for each user and return user info
     const sanitizedUsers = results.map(user => {
-      const { password, _id, ...otherUserInfo } = user as unknown as UserType & { _id: mongoose.Types.ObjectId}
+      const { password: _, _id, ...otherUserInfo } = user as unknown as UserType & { _id: mongoose.Types.ObjectId}
       return { id: _id.toString(), ...otherUserInfo}
     })
 

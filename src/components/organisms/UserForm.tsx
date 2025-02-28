@@ -9,13 +9,6 @@ export function UserForm ({
     setUser,
     isLoading,
 }: UserFormProps) {
-    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setUser(prev => ({
-            ...prev,
-            [event.target.name]: event.target.value,
-        }))
-    };
-
     const handleAvatarChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
         const files = event.target.files;
         if (files?.length === 1) {

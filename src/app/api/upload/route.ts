@@ -6,7 +6,6 @@ export async function POST(req: NextRequest) {
     const data = await req.formData();
     const fileEntry = data.get('file');
     if (fileEntry && fileEntry instanceof File) {
-        const file = data.get('file');
         const s3Client = new S3Client({
             region: 'us-east-1',
             credentials: {
