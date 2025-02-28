@@ -13,8 +13,6 @@ export default function LoginPage() {
     const router = useRouter();
 
     const {data: session} = useSession();
-
-    const searchParams = useSearchParams();
     
     // Get callbackUrl from query, default to "/"
     // const callbackUrl = searchParams.get('callbackUrl') || "/";
