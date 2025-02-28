@@ -68,6 +68,7 @@ export async function POST(req: NextRequest) {
 
     // sessions with 's' instead of 'session'
     // Modify NEXTAUTH_URL in environment variables after deploy to a real url
+    // Also need new signing secret from Stripe event destination to env
     const stripeSession = await stripe.checkout.sessions.create({
         line_items: stripeLineItems,
         mode: "payment",
