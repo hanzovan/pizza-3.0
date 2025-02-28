@@ -1,7 +1,6 @@
 "use client";
 
 import { SectionHeader } from "@/components/molecules";
-import { SearchParamsHandler } from "@/components/SearchParamsHandler";
 import { signIn, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -16,7 +15,13 @@ export default function LoginPage() {
     
     // Get callbackUrl from query, default to "/"
     // const callbackUrl = searchParams.get('callbackUrl') || "/";
-    const callbackUrl = SearchParamsHandler();
+    // const callbackUrl = SearchParamsHandler();
+
+    const [callbackUrl, setCallbackUrl] = useState('/');
+
+    useEffect(() => {
+        setCallbackUrl(new URLSearchParams(window.location.search).get('callbackUrl') || '/');
+    }, [])
 
     // If user already login, redirect user back to the callbackUrl
     useEffect(() => {
