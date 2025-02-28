@@ -92,6 +92,9 @@ const loginUser = async (email: string, passwordInput: string) => {
         
         const {password: _, _id, ...otherUserInfo} = result as UserType & { _id: mongoose.Types.ObjectId}
         
+        // tell eslint that _ is not use
+        void _
+        
         return {
             isError: false,
             data: { id: _id.toString(), ...otherUserInfo},
@@ -117,6 +120,9 @@ const findUser = async (filter: {_id?: string; email?: string}) => {
       }
     }
     const {password: _, _id, ...otherUserInfo} = result as UserType & { _id: mongoose.Types.ObjectId}
+
+    // tell eslint that _ is not use
+    void _
 
     return {
       isError: false,
@@ -148,6 +154,10 @@ const findAllUsers = async () => {
     // convert _id to string for each user and return user info
     const sanitizedUsers = results.map(user => {
       const { password: _, _id, ...otherUserInfo } = user as unknown as UserType & { _id: mongoose.Types.ObjectId}
+
+      // tell eslint that _ is not use
+      void _
+
       return { id: _id.toString(), ...otherUserInfo}
     })
 
