@@ -2,7 +2,6 @@
 
 import { SectionHeader } from "@/components/molecules";
 import { UserForm, UserTabs } from "@/components/organisms";
-import { UseProfile } from "@/components/UseProfile";
 import { AuthUserType } from "@/types";
 import { useSession } from "next-auth/react";
 import { redirect, useParams, useRouter } from "next/navigation";

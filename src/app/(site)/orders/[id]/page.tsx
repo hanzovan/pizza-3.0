@@ -55,8 +55,8 @@ export default function OrderPage() {
         });
       });
     }
-  }, []);
-  
+  }, [id]);
+
   if (!cartContext) {
     throw new Error("CartContext must be used within an AppProvider");
   }

@@ -2,6 +2,7 @@
 
 import { SectionHeader } from "@/components/molecules";
 import { signIn } from "next-auth/react";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -116,7 +117,7 @@ export default function RegisterPage() {
                         Or login with providers
                     </p>
                     <button onClick={handleLoginWithGoogle} type="button" className="flex gap-2 items-center justify-center bg-gray-200 border border-gray-300" disabled={state.isLoading}>
-                        <img src="/google.png" alt="google" width={32} height={32} />
+                        <Image src="/google.png" alt="google" width={32} height={32} />
                         Login with google
                     </button>
                     <div className="text-center text-gray-600 pt-4 border-t border-gray-300 mt-8">
